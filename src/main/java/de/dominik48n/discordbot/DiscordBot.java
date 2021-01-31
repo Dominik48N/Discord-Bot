@@ -5,7 +5,9 @@ import com.google.gson.GsonBuilder;
 import de.dominik48n.discordbot.config.BotConfiguration;
 import de.dominik48n.discordbot.config.FileConfiguration;
 import de.dominik48n.discordbot.logger.Logger;
+import javax.security.auth.login.LoginException;
 import lombok.Getter;
+import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
 
 /**
  * Created by Dominik48N on 31.01.2021
@@ -25,7 +27,16 @@ public class DiscordBot {
      * Start the discord bot
      */
     public void start() {
+        final DefaultShardManagerBuilder builder = new DefaultShardManagerBuilder();
+
         Logger.INFO.print( "Start the bot..." );
+
+        builder.setToken( this.botConfiguration.getToken() );
+        try {
+            builder.build();
+        } catch ( final LoginException e ) {
+            e.printStackTrace();
+        }
     }
 
     /**

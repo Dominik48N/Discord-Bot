@@ -13,6 +13,4 @@ fun main( args: Array< String > ) {
             discordBot.shutdown()
         }
     } )
-
-    while ( true ) {}
 }
