@@ -18,7 +18,7 @@ public class FileConfiguration {
     }
 
     public BotConfiguration load() {
-        return new BotConfiguration( this.document, this.document.getString( "bot_token" ) );
+        return new BotConfiguration( this.document, this.document.getString( "bot_token" ), this.document.getString( "playing_game" ) );
     }
 
     private Document mkdirs( final ClassLoader classLoader ) {
