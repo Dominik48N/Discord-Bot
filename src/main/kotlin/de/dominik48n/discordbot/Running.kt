@@ -8,9 +8,23 @@ fun main( args: Array< String > ) {
 
     discordBot.start()
 
+    Running( discordBot )
+
     Runtime.getRuntime().addShutdownHook( object: Thread() {
         override fun run() {
             discordBot.shutdown()
         }
     } )
+}
+
+class Running ( val discordBot: DiscordBot ){
+
+    companion object {
+        @JvmStatic lateinit var instance: Running
+    }
+
+    init {
+        instance = this
+    }
+
 }

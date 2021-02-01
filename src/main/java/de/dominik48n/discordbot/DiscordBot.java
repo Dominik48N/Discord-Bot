@@ -3,6 +3,7 @@ package de.dominik48n.discordbot;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import de.dominik48n.discordbot.command.CommandManager;
+import de.dominik48n.discordbot.command.ShutdownCommand;
 import de.dominik48n.discordbot.config.BotConfiguration;
 import de.dominik48n.discordbot.config.FileConfiguration;
 import de.dominik48n.discordbot.logger.Logger;
@@ -11,6 +12,7 @@ import lombok.Getter;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.sharding.DefaultShardManagerBuilder;
+import net.dv8tion.jda.api.sharding.ShardManager;
 
 /**
  * Created by Dominik48N on 31.01.2021
@@ -24,6 +26,8 @@ public class DiscordBot {
 
     private final BotConfiguration botConfiguration;
     private final CommandManager commandManager;
+
+    private ShardManager shardManager;
 
     public DiscordBot() {
         instance = this;
@@ -48,14 +52,19 @@ public class DiscordBot {
     public void shutdown() {
         Logger.INFO.print( "Stops the bot..." );
 
+        this.shardManager.setStatus( OnlineStatus.OFFLINE );
+        this.shardManager.shutdown();
+
         this.commandManager.stop();
+
+        System.exit( 0 );
     }
 
     /**
      * Register all commands
      */
     private void registerCommands() {
-
+        this.commandManager.addCommands( new ShutdownCommand() );
     }
 
     /**
@@ -69,7 +78,7 @@ public class DiscordBot {
         builder.setActivity( Activity.playing( this.botConfiguration.getPlayingGame() ) );
 
         try {
-            builder.build();
+            this.shardManager = builder.build();
         } catch ( final LoginException e ) {
             e.printStackTrace();
         }
