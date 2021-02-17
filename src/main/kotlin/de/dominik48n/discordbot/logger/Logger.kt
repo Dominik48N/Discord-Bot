@@ -7,7 +7,7 @@ enum class Logger( private val prefix: String ) {
 
     INFO( "[INFO]" ),
     ERROR( "[ERROR] " ),
-    WARNING( "[WARNING]" );
+    WARNING( "[WARNING] " );
 
     fun print( message: String ) {
         println( this.prefix + " " + message )
