@@ -1,4 +1,6 @@
-package de.dominik48n.discordbot
+package de.dominik48n.discordbot.bootstrap
+
+import de.dominik48n.discordbot.DiscordBot
 
 /**
  * Created by Dominik48N on 31.01.2021
@@ -12,12 +14,12 @@ fun main( args: Array< String > ) {
 
     Runtime.getRuntime().addShutdownHook( object: Thread() {
         override fun run() {
-            discordBot.shutdown()
+            discordBot.stop()
         }
     } )
 }
 
-class Running ( val discordBot: DiscordBot ){
+class Running ( val discordBot: DiscordBot ) {
 
     companion object {
         @JvmStatic lateinit var instance: Running
