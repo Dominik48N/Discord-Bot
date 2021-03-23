@@ -4,7 +4,7 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.*
 
-class CommandManager() {
+class CommandManager {
 
     private val commands: HashMap<String, Command> = HashMap()
     private var running: Boolean = false

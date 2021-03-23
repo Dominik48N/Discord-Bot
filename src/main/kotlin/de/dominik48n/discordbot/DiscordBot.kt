@@ -1,5 +1,6 @@
 package de.dominik48n.discordbot
 
+import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import de.dominik48n.discordbot.command.CommandManager
 import de.dominik48n.discordbot.command.ShutdownCommand
@@ -13,13 +14,10 @@ import net.dv8tion.jda.api.sharding.ShardManager
 import javax.security.auth.login.LoginException
 import kotlin.system.exitProcess
 
-/**
- * Created by Dominik48N on 02.03.2021
- */
 class DiscordBot {
 
     companion object {
-        val GSON = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
+        val GSON: Gson = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
     }
 
     private var botConfiguration: BotConfiguration = FileConfiguration(this.javaClass.classLoader).load()
