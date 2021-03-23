@@ -5,9 +5,6 @@ import java.io.File
 import java.io.IOException
 import java.nio.file.Files
 
-/**
- * Created by Dominik48N on 02.03.2021
- */
 class FileConfiguration(private val classLoader: ClassLoader) {
 
     private val document = this.mkdirs(this.classLoader)
